@@ -1,7 +1,35 @@
+import java.time.LocalDate;
+
 public class Main {
+    public static boolean checkIsLeap(int year) {
+        return (((year % 4 == 0) && (year % 100 != 0)) || (year % 400 == 0));
+    }
+
+    public static  void printLeapYear(int year) {
+        if (checkIsLeap(year)) {
+            System.out.println(year + " год  -    високосный ");
+            return ;
+        }
+            System.out.println(year + " год  - НЕ високосный ");
+    }
+
+    public static String chechVersionOS(boolean OS, int year, int checkYear) {
+        String light = " " ;
+        if (year < checkYear) { light = "облегченную ";
+        }
+        if (OS) {
+           return "Установите " + light + "версию приложения для Android по ссылке ";
+        }
+        return "Установите " + light + "версию приложения для iOS по ссылке";
+    }
+
+    public static int calcTimeDevivery(int distance) {
+        return (int) (((distance - 20) / 40) + 1);
+    }
+
     public static void main(String[] args) {
 
-//        ### Задание 1
+//        ###   Задание 1
 //
 //        Реализуйте метод, который получает в качестве параметра год, а затем проверяет, является ли он високосным, и выводит результат в консоль. 
 //
@@ -11,6 +39,9 @@ public class Main {
 //
 //        Результат программы выведите в консоль. Если год високосный, то должно быть выведено “*номер года —* високосный год”. Если год не високосный, то, соответственно: “*номер года —* не **високосный год”.
 //        System.out.println("Hello world!");
+        for (int i = 1184; i <= 1614; i++  ) {
+            printLeapYear(i);
+        }
 
 
 //        ### Задание 2
@@ -58,6 +89,11 @@ public class Main {
 //
 //        В результате программа должна выводить в консоль в зависимости от исходных данных, какую версию приложения (обычную или lite) и для какой ОС (Android или iOS) нужно установить пользователю.
 
+        int currentYear = LocalDate.now().getYear();
+
+        for (int i = 2014; i <= currentYear + 3  ; i++  ) {
+            System.out.println("Год выпуска телефона - " + i + ", рекомендация : "  +  chechVersionOS( (i % 2 == 0 ) , i, currentYear ));
+        }
 
 //        Задание 3
 //        Возвращаемся к любимой многими задаче на расчет дней доставки банковской карты от банка.
@@ -84,6 +120,10 @@ public class Main {
 //
 //
 //        Наша задача — доработать код, а именно написать метод, который на вход принимает дистанцию и возвращает итоговое количество дней доставки.
+
+        for (int deliveryDistance = 18 ; deliveryDistance  <= 180 ; deliveryDistance += 18  ) {
+            System.out.println("Дистанция " + deliveryDistance + ". Для доставки потребуется дней: " +  calcTimeDevivery(deliveryDistance));
+        }
 
     }
 }
